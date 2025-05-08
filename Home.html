@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>DAX YTDownloader.COM</title>
+    <style>
+      body{
+        margin: 0;
+        padding: 0;
+        background:#06c4f8;
+      }
+      
+.header{
+  
+  display: flex;
+  flex-direction: row;
+height: 80px;
+justify-content:space-evenly;
+align-items: center;
+}
+p{
+  color: #fff;
+  font-family:poppins,sans-serif ;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  background: #111;
+  color: white;
+  font-family: monospace;
+}
+.convert-cont{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  
+}
+.search-bar,.feed-bar{
+  width: 100%;
+min-width: 300px;
+  height: 45px;
+  font-size: 18px;
+font-family:'Times New Roman', Times, serif;
+border-radius: 5px;
+border-style: none;
+color: black;
+max-width: 1000px;
+background-color: white;
+padding: 10px;
+}
+.search-bar{
+  margin-top: 70px;
+}
+.search-bar::placeholder{
+  color:#ccc;
+}
+.feed-bar::placeholder{
+font-size: 12px;
+font-family: monospace;
+}
+.convert-button{
+  cursor:pointer;
+  margin-top: 30px;
+  color:white;
+  background-color:#007bff;
+  border-style: none;
+  border-radius:13px;
+  width:100%;
+  min-width: 300px;
+  max-width: 1000px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+.convert-button:active{
+  cursor: progress;
+  background-color: white;
+  color:#06c4f8;
+  transition: 0.15s;
+}
+.convert-button:hover{
+  opacity: 0.9;
+  background-color: ;
+  transition: 0.3s;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.3);
+}
+
+.ratings{
+  height: 70px;
+  width:70px;
+  border-radius: 50%;
+}
+.comments-conts{
+  display: flex;
+  flex-direction: column;
+}
+.first-comment-cont{
+  display: flex;
+  flex-direction: row;
+}
+.rator{
+  margin-left: 10px;
+  
+}
+.suggest-bar{
+  border-radius:7px ;
+}
+.bottom{
+  background:linear-gradient(135deg,red,black) ;
+  
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.header1{
+  display: flex;
+  flex-direction: row;
+display: none;
+justify-content:space-between;
+align-items: center;
+width: 100%;
+}
+
+.phone-display{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  gap:2px;
+  width:100%;
+  
+}
+nav a {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  position: relative;
+  
+}
+
+nav a .icon {
+  font-size: 23px; /* or any size */
+  font-weight: bold;
+}
+
+nav a span {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+nav a:hover span {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+.span1,.span2{
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.span1,.span2:hover{
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+@media(min-width:768px){
+  body{
+    background:#000851;
+  }
+.header1{
+  display: block;
+  transition: 0.3s;
+}
+.header{
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+}
+.convert-button{
+  background-color: #06c4f8;
+}
+}
+.circle{
+  cursor: help;
+}
+.profile-pic {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.profile-pic::after {
+  content: "No Profile Photo";
+  position: absolute;
+  top: 90%; /* place below SVG */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.profile-pic:hover::after {
+  opacity: 1;
+  visibility: visible;
+  animation: tooltipText 3s infinite;
+}
+
+@keyframes tooltipText {
+  0%, 49.999% {
+    content: "No Profile Photo";
+  }
+  50%, 100% {
+    content: "Tap to Set";
+  }
+}
+
+.menu-btn {
+  position: relative;
+  top: 1rem;
+  left: 1rem;
+  display: inline-block;
+  cursor: pointer;
+  z-index: 3;
+  margin-top: -30px;
+  margin-left: -110px;
+}
+.h-icon{
+  position: absolute;
+  bottom: -0.5rem;
+  color: white;
+  pointer-events: none;
+opacity: 0;
+}
+.menu-btn:hover .h-icon{
+  transition: 2s ease;
+  opacity: 1;
+}
+.menu-btn .back-icon{
+  display: none !important;
+  
+}
+#menu-toggle:checked + label .hamburger {
+  display: none;
+  
+}
+#menu-toggle:checked + label .back-icon {
+  display: inline !important;
+}
+#menu-toggle:checked ~ .menu-btn .h-icon::after{
+  content: "Back";
+  
+}
+.menu-btn .h-icon::after{
+  content: "Menu";
+  
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 200px;
+  height: 100vh;
+  background:#06c4f8;
+  color: white;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+  transition: left 0.3s ease;
+  z-index: 2;
+  text-decoration: none;
+  
+  
+}
+
+#menu-toggle:checked ~ .sidebar {
+  left: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 3rem 0 0;
+}
+
+.sidebar li {
+  margin-bottom: 1.5rem;
+  display:flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar li:hover{
+  align-items: center;
+
+}
+.main-content {
+  
+  transition: transform 0.3s ease,filter 0.3s ease;
+  }
+  #menu-toggle:checked ~ .main-content {
+  transform: translateX(250px);
+  filter: blur(3px);
+}
+a {
+  color: inherit;       /* or any color you want */
+  text-decoration: none;
+}
+.circle1{
+  margin-top: 30px
+
+  }
+  .enter-icon {
+  display: inline-block;
+  border-radius: 25%; /* optional: makes background circular */
+  transition: background 0.3s;
+}
+
+.enter-icon:hover {
+  background-color: rgb(231, 235, 235);
+
+}
+
+
+    </style>
+  </head>
+<body>
+  <header>
+ <div class="header">
+  <input type="checkbox" id="menu-toggle" hidden>
+  <label for="menu-toggle" class="menu-btn">
+    <nav>
+    
+        <svg class="icon hamburger" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="white" d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+        </svg>
+        <div class=" h-icon">
+          
+        </div>
+    
+    </nav>
+    <svg class="back-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="#fff">
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+    </svg>
+  </label>
+  
+  <aside class="sidebar">
+    
+    <svg class="circle1" width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meer">
+      <circle cx="50" cy="50" r="45" fill="url(#grad)" />
+      <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#4b0082;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="white" font-family="monospace">
+        DAX™
+      </text>
+      </svg>
+      <div>
+        <div class="profile-pic"> 
+          <svg class="svg-icon" width="70" height="70" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="48" stroke="" stroke-width="4" fill="#ccc"/>
+            <path d="M50 50c8 0 14-6 14-14s-6-14-14-14-14 6-14 14 6 14 14 14z" fill="#fff"/>
+            <path d="M30 76c0-8 12-12 20-12s20 4 20 12v4H30v-4z" fill="#fff"/>
+          </svg>
+         
+        </div>
+      </div>
+    <ul>
+      <a href="Home-Page-Dax.html">
+
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+    <path d="M3 9.5l9-7 9 7V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/>
+  </svg>
+          Home
+          <div class="enter-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+        </li>
+      </a>
+      <a href="https://www.youtube.com" target="_self">
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+            <path  d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm2.5 12.5l-6 2.5 2.5-6 6-2.5-2.5 6z"/>
+          </svg>
+          Explore
+          <div class="enter-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+        </li>
+      </a>
+      <a href="#">
+        <li>
+          <svg  class="svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+            <path d="M12 16l4-4h-3V4h-2v8H8l4 4zm-8 2v2h16v-2H4z"/>
+          </svg>
+          Downloads
+          <div class="enter-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+        </li>
+      </a>
+      <a href="#">
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.667 1.667 0 0 0 2.495 1.004c1.54-.98 3.393.873 2.413 2.413a1.667 1.667 0 0 0 1.004 2.495c1.756.426 1.756 2.924 0 3.35a1.667 1.667 0 0 0-1.004 2.495c.98 1.54-.873 3.393-2.413 2.413a1.667 1.667 0 0 0-2.495 1.004c-.426 1.756-2.924 1.756-3.35 0a1.667 1.667 0 0 0-2.495-1.004c-1.54.98-3.393-.873-2.413-2.413a1.667 1.667 0 0 0-1.004-2.495c-1.756-.426-1.756-2.924 0-3.35a1.667 1.667 0 0 0 1.004-2.495c-.98-1.54.873-3.393 2.413-2.413a1.667 1.667 0 0 0 2.495-1.004z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          Settings
+          <div class="enter-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </div>
+        </li>
+      </a>
+     
+    </ul>
+    
+  </aside> 
+
+
+  <nav>
+    <a href="#">
+      <div class="profile-pic"> 
+      <svg class="svg-icon" width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" stroke="" stroke-width="4" fill="#ccc"/>
+        <path d="M50 50c8 0 14-6 14-14s-6-14-14-14-14 6-14 14 6 14 14 14z" fill="#fff"/>
+        <path d="M30 76c0-8 12-12 20-12s20 4 20 12v4H30v-4z" fill="#fff"/>
+      </svg>
+     
+    </div>
+    </a>
+    </nav>
+    
+    <nav> <p>User Name</p></nav>
+    <nav>
+      <svg class="circle" width="70" height="70" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meer">
+      <circle cx="50" cy="50" r="45" fill="url(#grad)" />
+      <defs>
+       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+         <stop offset="0%" style="stop-color:#4b0082;stop-opacity:1" />
+         <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+       </linearGradient>
+      </defs>
+      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="white" font-family="monospace">
+       DAX™
+      </text>
+      </svg>
+      </nav>
+    
+    </header>
+    <header>
+      <div class="header1">
+        <nav class="phone-display">
+          <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+              <path d="M3 9.5l9-7 9 7V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/>
+            </svg>
+           <div class="icon"></div>
+           <span>Go to Home</span>
+         </a>
+          
+          <a href="https://www.youtube.com" target="_self"> 
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+              <path  d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm2.5 12.5l-6 2.5 2.5-6 6-2.5-2.5 6z"/>
+            </svg>
+           <div class="icon"></div>
+           <span>Discover Content</span>
+          </a>
+          <a href="#">
+            <svg  class="svg-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 24 24">
+              <path d="M12 16l4-4h-3V4h-2v8H8l4 4zm-8 2v2h16v-2H4z"/>
+            </svg>
+           <div class="icon"></div>
+           <span>View Download History</span></a>
+           <a href="#">
+            <nav>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.667 1.667 0 0 0 2.495 1.004c1.54-.98 3.393.873 2.413 2.413a1.667 1.667 0 0 0 1.004 2.495c1.756.426 1.756 2.924 0 3.35a1.667 1.667 0 0 0-1.004 2.495c.98 1.54-.873 3.393-2.413 2.413a1.667 1.667 0 0 0-2.495 1.004c-.426 1.756-2.924 1.756-3.35 0a1.667 1.667 0 0 0-2.495-1.004c-1.54.98-3.393-.873-2.413-2.413a1.667 1.667 0 0 0-1.004-2.495c-1.756-.426-1.756-2.924 0-3.35a1.667 1.667 0 0 0 1.004-2.495c-.98-1.54.873-3.393 2.413-2.413a1.667 1.667 0 0 0 2.495-1.004z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <div class="icon">
+                <span>Settings</span>
+              </div>
+            </nav>
+           </a>
+          
+          <a href="#">
+            <div class="profile-pic"> 
+            <svg class="svg-icon" width="60" height="60" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" stroke="" stroke-width="4" fill="#ccc"/>
+              <path d="M50 50c8 0 14-6 14-14s-6-14-14-14-14 6-14 14 6 14 14 14z" fill="#fff"/>
+              <path d="M30 76c0-8 12-12 20-12s20 4 20 12v4H30v-4z" fill="#fff"/>
+            </svg>
+           
+          </div>
+          </a>
+         
+         
+        <nav> <p>User Name</p></nav>
+        <nav>
+          <svg class="circle" width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="url(#grad)" />
+            <defs>
+              <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4b0082;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="white" font-family="monospace">
+              DAX™
+            </text>
+            </svg>
+         </nav>
+      </div>
+      <div class="entry"><marquee><p class="welome">Welcome To Dax YTDownloader</p></marquee>
+      </div>
+    </header>
+    
+    <main>
+      <section>
+        <div class="convert-cont" style="width:80%; margin:auto;">
+          <input type="search" placeholder="Search or Paste Youtube Link" class="search-bar">
+          
+          <a href="Format.html" class="convert-button">
+            Convert
+          </a>
+          </div>
+      </section>
+      
+      <article>
+        <p>At <em™><b>DAX YOUTUBE DOWNLOADER</b> </em> you can download your favorite youtube videos,shorts,sounds in different formats like MP3,MP4, and we also give you access to a variety format quality such as 720P,4K,8K and you can save it on your device's internal storage giving you acess to it when offline and the ability to share it to other devices offline for free </p>
+      </article>
+      <div class="comments-cont">
+        <p>OUR RATINGS:</p>
+      <div class="first-comment-cont"><img src="guy.jpeg" alt="Alex Gabriel's profile picture" class="ratings">
+         <p class="rator">ALEX GABRIEL</p> </div>
+        <p>This is the best Youtube Downloader i've used it's
+           free has no ads and super fast i highly recommend it</p>
+          </div>
+          <div class="first-comment-cont"><img src="girl.jpeg" class="ratings">
+            <p class="rator">ARLENE MOON</p> </div>
+            <p>This is by far the best website for downloading and converting youtube videos no ads safe and highly efficient </p>
+            <section>
+              <div class="convert-cont">
+                <p>
+              Feedback
+            </p>
+              <div class="convert-cont" style="width:80%;" ><textarea placeholder="Please enter any issues you'd like to report or suggestions you wish to make. Also leave your email for a follow up. " class="feed-bar" ></textarea></div>
+              
+            <p>Thank you for your feedback and support towards us we'll get to it as soon as possible.</p>
+          </div>
+        </section>
+      
+          </main>
+           <footer>
+            <div class="bottom">  
+            <p>DAX YTDownloader </p>
+            <p> ©2025</p>
+            <p> "Stars shine for a reason.Even when it's gone, its light keeps shining"</p>
+             <p> For more inquiries and support contact us at DaxYt@gmail.com</p>
+              <p>More features coming soon....</p>
+            <p>  Thank you for using DAX YTDownloader</p>
+          </div>
+        </footer>
+
+
+  
+</body>
+</html>
